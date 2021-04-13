@@ -2,10 +2,10 @@
 
 A custom implementation of `strtoll` which functions very similar to the standard C `strtod` function with some minor differences:
 1. this function skips over underscores to allow for underscore seperated numbers
-2. numbers starting with 0 are not aitomatically treated as Octals (see details [below](##Options))
+2. numbers starting with 0 are not automatically treated as Octals (see details [below](##Options))
 3. supports smalltalk style radix literals (see details below)
-4. number systems with a radix less than 10 consume as many characters as it can (for example, in the original only `0` would be consumed in the string `0o12345678` wheras my implementation will consume as many digits it can resulting in `0o12334567` being consumed)
-5. capital character `X` is not treated as hexadecimal
+4. number systems with a radix less than 10 consume as many characters as it can (for example, in the original only `0` would be consumed in the string `0o12345678` with `o12345678` left behind wheras my implementation will consume as many digits it can resulting in `0o12334567` being consumed with only `8` left behind)
+5. prefix `0X` is not treated as a hexadecimal literal
 
 *There may be more inconsistancies, these are the minor ones due to design simplicity or what I have found through testing...*
 
