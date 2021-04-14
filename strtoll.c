@@ -7,9 +7,9 @@ static long long c8_strToLL(char* str, char** v, unsigned int base) {
     long long cutoff = LLONG_MAX;
     bool tooBig = false, neg = false, hasDigits = false;
 #ifdef ALLOW_SMALLTALK_RADIX_LITERALS
-    bool radixSet = base;
+    bool radixSet = base, radixLiteral = false;
 #endif
-    char* start = str, prefix = NULL;
+    char* start = str;
     char c = *str;
     if (c == '-') {
         neg = true;
@@ -76,6 +76,8 @@ static long long c8_strToLL(char* str, char** v, unsigned int base) {
                 base = num;
                 num = 0;
                 hasDigits = false;
+                radixLiteral = true;
+                start = str - 1;
                 continue;
             } else {
                 --str;
@@ -109,8 +111,12 @@ static long long c8_strToLL(char* str, char** v, unsigned int base) {
     if (v) {
         if (hasDigits)
             *v = str;
-        else
+        else {
+#ifdef ALLOW_SMALLTALK_RADIX_LITERALS
+            if (radixLiteral) num = base;
+#endif
             *v = start;
+        }
     }
     if (tooBig) {
         errno = ERANGE;

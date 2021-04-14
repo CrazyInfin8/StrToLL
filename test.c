@@ -12,7 +12,7 @@
  * 16rABCDEF // same as hexadecimal (radix 16)
  * 36rA_NUMBER // radix (36)
  */
-// #define ALLOW_SMALLTALK_RADIX_LITERALS
+#define ALLOW_SMALLTALK_RADIX_LITERALS
 
 /**
  * Whether to treat numbers with leading zeros as octals
@@ -31,7 +31,7 @@
 #define INVALIDATE_SUB_BASE10 // TODO: unimplemented yet
 
 #include "strtoll.c"  // c8_strToLL
-#define testCount 35
+#define testCount 41
 struct {
     char *str;
     int base;
@@ -71,6 +71,12 @@ struct {
     /*32*/ {"-0O12345", 0},
     /*33*/ {"37rABC", 0},
     /*34*/ {"0junk", 0},
+    /*35*/ {"-32r", 0},
+    /*36*/ {"-37r", 0},
+    /*37*/ {"-37rTHIS_IS_INVALID", 0},
+    /*38*/ {"32r", 0},
+    /*39*/ {"37r", 0},
+    /*40*/ {"37rTHIS_IS_INVALID", 0},
 };
 
 void consistencyCheck() {
