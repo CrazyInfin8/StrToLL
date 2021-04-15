@@ -7,7 +7,7 @@ A custom implementation of `strtoll` which functions very similar to the standar
 4. number systems with a radix less than 10 consume as many characters as it can (for example, in the original only `0` would be consumed in the string `0o12345678` with `o12345678` left behind wheras my implementation will consume as many digits it can resulting in `0o12334567` being consumed with only `8` left behind)
 5. prefix `0X` is not treated as a hexadecimal literal
 
-*There may be more inconsistancies, these are the minor ones due to design simplicity or what I have found through testing...*
+*There may be more inconsistancies. These are the minor ones due to design, simplicity, or what I have found through testing...*
 
 ## Options
 There are some togglable options to change the parsers behavior. they can be enabled with `define`'s. Here are some options and what they do:
